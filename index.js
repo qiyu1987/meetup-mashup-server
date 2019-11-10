@@ -8,6 +8,7 @@ var mup = new Meetup()
 
 // outside of our stream (!) we setup an empty object
 let topicsCounter = {}
+let topTenTopicsCounter = {}
 mup.stream("/2/rsvps", stream => {
 	stream
 		.on("data", item => {
@@ -25,7 +26,6 @@ mup.stream("/2/rsvps", stream => {
 				})
 			}
 			const arrayOfTopics = Object.keys(topicsCounter)
-			let topTenTopicsCounter = {}
 
 			arrayOfTopics
 				.sort((topicA, topicB) => {
@@ -51,4 +51,5 @@ mup.stream("/2/rsvps", stream => {
 })
 io.on("connection", socket => {
 	console.log("got connection")
+	socket.emit("action", topTenTopicsCounter)
 })
