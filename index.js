@@ -12,8 +12,6 @@ let topTenTopics = []
 mup.stream("/2/rsvps", stream => {
 	stream
 		.on("data", item => {
-			console.log("got item " + item)
-
 			// inside of our stream event handler (!) we retrieve the group topics
 			const topicNames = item.group.group_topics.map(topic => topic.topic_name)
 			if (topicNames.includes("Software Development")) {
