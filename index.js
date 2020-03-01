@@ -2,16 +2,19 @@
 var app = require("express")()
 var server = require("http").Server(app)
 var io = require("socket.io")(server)
-server.listen(3002)
+server.listen(3002, console.log('server Listening on 3002'))
+// setUp connection to Meetup API through meetup
 var Meetup = require("meetup")
 var mup = new Meetup()
 
 // outside of our stream (!) we setup an empty object
 let topicsCounter = {}
 let topTenTopics = []
+// stream to work with events 
 mup.stream("/2/rsvps", stream => {
 	stream
 		.on("data", item => {
+			// console.log('got item',item)
 			// inside of our stream event handler (!) we retrieve the group topics
 			const topicNames = item.group.group_topics.map(topic => topic.topic_name)
 			if (topicNames.includes("Software Development")) {
@@ -22,6 +25,7 @@ mup.stream("/2/rsvps", stream => {
 						topicsCounter[name] = 1
 					}
 				})
+				// console.log(topicsCounter)
 			}
 			const arrayOfTopics = Object.keys(topicsCounter)
 			const topTenTopics = arrayOfTopics
