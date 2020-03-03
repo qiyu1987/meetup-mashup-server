@@ -1,8 +1,7 @@
 // index.js
 var app = require("express")()
-var server = require("http").Server(app)
+var server = app.listen(3002)
 var io = require("socket.io")(server)
-server.listen(3002, console.log('server Listening on 3002'))
 // setUp connection to Meetup API through meetup
 var Meetup = require("meetup")
 var mup = new Meetup()
