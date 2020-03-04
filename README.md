@@ -1,4 +1,8 @@
 # This is a Practice Project to learn WebSocket
+
+This is backend of a project shows realtime meet-up Software Programing events and rsvps.
+The front end repo can be find here. [meetup-mashup-ui](https://github.com/qiyu1987/meetup-mashup-ui)
+
 ## Stack Used
    - Node.js
    - Use [meetup](https://www.npmjs.com/package/meetup) node.js interface to connect to [meetup API](https://www.meetup.com/meetup_api/)
